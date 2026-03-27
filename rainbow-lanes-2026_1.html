@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rainbow Lanes Clayton, NC — 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --black: #0a0a0f;
+    --panel: #111118;
+    --card: #1a1a24;
+    --border: #2a2a3a;
+    --red: #e8213a;
+    --red2: #ff3d5a;
+    --gold: #f5c842;
+    --teal: #00d4c8;
+    --white: #f0eee8;
+    --muted: #888899;
+    --font-head: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 64px;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-size: 1.7rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: .85rem; font-weight: 500; letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--red); color: #fff;
+    border: none; padding: .5rem 1.2rem;
+    font-family: var(--font-body); font-weight: 700;
+    font-size: .85rem; letter-spacing: .08em; text-transform: uppercase;
+    border-radius: 4px; cursor: pointer;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--red2); }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: all .3s;
+  }
+  .mobile-menu {
+    display: none; flex-direction: column;
+    position: fixed; top: 64px; left: 0; right: 0;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem; gap: 1rem;
+    z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--white); text-decoration: none;
+    font-size: 1.1rem; font-weight: 500;
+    padding: .5rem 0; border-bottom: 1px solid var(--border);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 120px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,33,58,.15) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,212,200,.08) 0%, transparent 60%),
+      linear-gradient(180deg, #0a0a0f 0%, #0d0d14 100%);
+  }
+  .lanes-art {
+    position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+    width: 52%; opacity: 0.08;
+    display: flex; gap: 6px; height: 80%;
+  }
+  .lane-strip {
+    flex: 1; border-radius: 4px;
+    background: linear-gradient(180deg, var(--border) 0%, transparent 100%);
+    position: relative;
+  }
+  .lane-strip::after {
+    content: ''; position: absolute; left: 50%; top: 10%;
+    width: 2px; height: 80%; background: rgba(245,200,66,.3);
+    transform: translateX(-50%);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono); font-size: .75rem;
+    color: var(--teal); letter-spacing: .2em; text-transform: uppercase;
+    margin-bottom: 1.2rem; position: relative; z-index: 1;
+  }
+  .hero-title {
+    font-family: var(--font-head);
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    line-height: .9; letter-spacing: 2px;
+    position: relative; z-index: 1; max-width: 700px;
+  }
+  .hero-title .strike { color: var(--red); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--muted); max-width: 460px;
+    margin: 1.5rem 0 2.5rem; position: relative; z-index: 1;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-primary {
+    background: var(--red); color: #fff;
+    border: none; padding: .9rem 2rem;
+    font-family: var(--font-body); font-weight: 700;
+    font-size: .95rem; letter-spacing: .06em; text-transform: uppercase;
+    border-radius: 4px; cursor: pointer;
+    transition: all .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--red2); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    border: 1px solid var(--border); padding: .9rem 2rem;
+    font-family: var(--font-body); font-weight: 500;
+    font-size: .95rem; letter-spacing: .06em; text-transform: uppercase;
+    border-radius: 4px; cursor: pointer;
+    transition: all .2s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--white); transform: translateY(-2px); }
+  .hero-stats {
+    position: relative; z-index: 1;
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .stat-item { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: var(--font-head); font-size: 2.5rem;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-label { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-full { max-width: none; padding: 5rem 0; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-tag {
+    font-family: var(--font-mono); font-size: .7rem;
+    color: var(--teal); letter-spacing: .2em; text-transform: uppercase;
+    margin-bottom: .8rem; display: block;
+  }
+  .section-title {
+    font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 1px; margin-bottom: 1rem;
+  }
+  .section-desc { color: var(--muted); max-width: 540px; margin-bottom: 3rem; font-weight: 300; }
+  .divider { height: 1px; background: var(--border); margin: 0 2rem; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem; overflow-x: auto;
+  }
+  .tab-btn {
+    padding: .8rem 1.5rem; background: none; border: none;
+    color: var(--muted); font-family: var(--font-body);
+    font-size: .85rem; font-weight: 500; letter-spacing: .08em;
+    text-transform: uppercase; cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; white-space: nowrap;
+    transition: all .2s;
+  }
+  .tab-btn.active { color: var(--white); border-bottom-color: var(--red); }
+  .tab-btn:hover:not(.active) { color: var(--white); }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ── BOOKING ── */
+  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .form-group { display: flex; flex-direction: column; gap: .5rem; }
+  .form-group label {
+    font-size: .78rem; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--white); padding: .75rem 1rem;
+    border-radius: 6px; font-family: var(--font-body); font-size: .95rem;
+    outline: none; transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--teal);
+  }
+  .form-group select option { background: var(--card); }
+  .time-slots { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: .6rem; margin-top: .5rem; }
+  .time-slot {
+    padding: .5rem; text-align: center;
+    border: 1px solid var(--border); border-radius: 6px;
+    font-size: .8rem; font-family: var(--font-mono);
+    cursor: pointer; transition: all .2s; background: var(--card);
+    color: var(--muted);
+  }
+  .time-slot:hover { border-color: var(--teal); color: var(--white); }
+  .time-slot.selected { border-color: var(--teal); background: rgba(0,212,200,.12); color: var(--teal); }
+  .time-slot.taken { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
+  .booking-summary {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .summary-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .9rem;
+  }
+  .summary-row .label { color: var(--muted); }
+  .summary-row .value { font-weight: 600; font-family: var(--font-mono); }
+  .summary-total {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem; border-top: 1px solid var(--border);
+    font-size: 1.1rem; font-weight: 700;
+  }
+  .summary-total .value { color: var(--gold); font-family: var(--font-mono); font-size: 1.3rem; }
+  .confirm-msg {
+    display: none; background: rgba(0,212,200,.1);
+    border: 1px solid var(--teal); border-radius: 8px;
+    padding: 1rem 1.5rem; color: var(--teal);
+    font-weight: 500; margin-top: 1rem; text-align: center;
+  }
+  .confirm-msg.show { display: block; }
+
+  /* ── TEAMS ── */
+  .teams-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .team-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+  }
+  .team-card h3 {
+    font-family: var(--font-head); font-size: 1.4rem;
+    margin-bottom: 1rem; letter-spacing: 1px;
+  }
+  .member-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin: 1rem 0; }
+  .member-item {
+    display: flex; align-items: center; gap: .75rem;
+    background: var(--panel); border-radius: 6px; padding: .5rem .75rem;
+    font-size: .9rem;
+  }
+  .member-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--border); display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; font-weight: 700; color: var(--muted);
+    flex-shrink: 0;
+  }
+  .member-role { margin-left: auto; font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .add-member-row { display: flex; gap: .5rem; margin-top: 1rem; }
+  .add-member-row input {
+    flex: 1; background: var(--panel); border: 1px solid var(--border);
+    color: var(--white); padding: .5rem .75rem; border-radius: 6px;
+    font-family: var(--font-body); font-size: .9rem; outline: none;
+  }
+  .btn-sm {
+    padding: .5rem .9rem; background: var(--red); color: #fff;
+    border: none; border-radius: 6px; font-weight: 700; font-size: .8rem;
+    cursor: pointer; white-space: nowrap;
+  }
+  .btn-sm:hover { background: var(--red2); }
+  .btn-sm.teal { background: rgba(0,212,200,.15); color: var(--teal); border: 1px solid var(--teal); }
+  .btn-sm.teal:hover { background: rgba(0,212,200,.25); }
+  .create-team-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  /* ── SCOREBOARD ── */
+  .score-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: gap; gap: 1rem; }
+  .match-selector { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .match-chip {
+    padding: .4rem .9rem; border: 1px solid var(--border);
+    border-radius: 20px; font-size: .78rem; cursor: pointer;
+    background: var(--card); color: var(--muted);
+    transition: all .2s;
+  }
+  .match-chip.active { border-color: var(--gold); color: var(--gold); background: rgba(245,200,66,.08); }
+  .scorecard-wrap { overflow-x: auto; }
+  .scorecard {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--font-mono); font-size: .82rem;
+    min-width: 700px;
+  }
+  .scorecard th {
+    background: var(--panel); color: var(--muted);
+    padding: .6rem .8rem; text-align: center;
+    border: 1px solid var(--border);
+    font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .scorecard th.player-col { text-align: left; min-width: 140px; }
+  .scorecard td {
+    border: 1px solid var(--border); padding: .5rem .8rem;
+    text-align: center; vertical-align: top;
+  }
+  .scorecard tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .frame-cell { position: relative; min-width: 52px; }
+  .frame-rolls { font-size: .72rem; color: var(--muted); text-align: right; min-height: 16px; }
+  .frame-score { font-size: .95rem; font-weight: 700; color: var(--white); }
+  .frame-score.strike { color: var(--gold); }
+  .frame-score.spare { color: var(--teal); }
+  .total-cell { background: rgba(245,200,66,.06) !important; color: var(--gold); font-size: 1rem; font-weight: 700; }
+  .player-name-cell { text-align: left; font-weight: 700; color: var(--white); }
+  .roll-input {
+    width: 38px; background: var(--panel); border: 1px solid var(--border);
+    color: var(--white); text-align: center; border-radius: 4px;
+    font-family: var(--font-mono); font-size: .8rem; padding: .2rem;
+    outline: none;
+  }
+  .roll-input:focus { border-color: var(--teal); }
+  .standing-table { width: 100%; border-collapse: collapse; }
+  .standing-table th, .standing-table td {
+    padding: .75rem 1rem; border-bottom: 1px solid var(--border);
+    text-align: left; font-size: .9rem;
+  }
+  .standing-table th { color: var(--muted); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+  .standing-table tr:hover td { background: rgba(255,255,255,.03); }
+  .rank-badge {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: .75rem; font-weight: 700;
+  }
+  .rank-1 { background: var(--gold); color: #000; }
+  .rank-2 { background: #c0c0c0; color: #000; }
+  .rank-3 { background: #cd7f32; color: #000; }
+  .rank-other { background: var(--border); color: var(--muted); }
+  .win-bar-wrap { width: 80px; height: 6px; background: var(--border); border-radius: 3px; display: inline-block; vertical-align: middle; }
+  .win-bar { height: 100%; background: var(--teal); border-radius: 3px; }
+
+  /* ── SERVICES ── */
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .service-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    transition: all .3s; cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--red);
+  }
+  .service-card:hover { border-color: rgba(232,33,58,.4); transform: translateY(-3px); }
+  .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .service-card h3 { font-family: var(--font-head); font-size: 1.4rem; letter-spacing: 1px; margin-bottom: .6rem; }
+  .service-card p { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+  .service-price {
+    margin-top: 1.2rem; font-family: var(--font-mono);
+    font-size: .85rem; color: var(--gold);
+  }
+
+  /* ── HOURS ── */
+  .hours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+  .hours-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem; text-align: center;
+  }
+  .hours-day { font-family: var(--font-head); font-size: 1.2rem; letter-spacing: 1px; }
+  .hours-time { font-family: var(--font-mono); font-size: .78rem; color: var(--teal); margin-top: .4rem; }
+  .hours-card.today { border-color: var(--gold); }
+  .hours-card.today .hours-day { color: var(--gold); }
+  .today-badge {
+    display: inline-block; background: rgba(245,200,66,.15);
+    color: var(--gold); font-size: .65rem; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: .15rem .5rem; border-radius: 3px; margin-top: .3rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: rgba(232,33,58,.12); border: 1px solid rgba(232,33,58,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-detail h4 { font-weight: 600; margin-bottom: .2rem; }
+  .contact-detail p { color: var(--muted); font-size: .9rem; }
+  .contact-detail a { color: var(--teal); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--panel); border-top: 1px solid var(--border);
+    padding: 3rem 2rem 2rem; max-width: none;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+  .footer-brand .nav-logo { display: inline-block; margin-bottom: 1rem; }
+  .footer-brand p { color: var(--muted); font-size: .9rem; max-width: 260px; line-height: 1.7; }
+  .footer-col h5 {
+    font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+  .footer-col a { color: var(--white); text-decoration: none; font-size: .9rem; opacity: .7; }
+  .footer-col a:hover { opacity: 1; color: var(--teal); }
+  .footer-bottom {
+    padding-top: 1.5rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    font-size: .8rem; color: var(--muted);
+  }
+
+  /* ── NOTIFICATION ── */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+    background: var(--card); border: 1px solid var(--teal);
+    color: var(--teal); padding: .9rem 1.4rem;
+    border-radius: 8px; font-size: .9rem; font-weight: 500;
+    transform: translateY(100px); opacity: 0;
+    transition: all .3s; pointer-events: none;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── LIVE INDICATOR ── */
+  .live-dot {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-size: .75rem; color: var(--red); font-family: var(--font-mono);
+    letter-spacing: .08em; text-transform: uppercase;
+  }
+  .live-dot::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--red); display: block;
+    animation: pulse 1.4s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(.7); }
+  }
+
+  /* ── HERO SCORE TICKER ── */
+  .hero-score-row {
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(26,26,36,0.75);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: .6rem 1rem;
+    backdrop-filter: blur(6px);
+    gap: 1rem;
+  }
+  .hscore-lane { font-family:var(--font-mono); font-size:.68rem; color:var(--muted); white-space:nowrap; }
+  .hscore-teams { display:flex; align-items:center; gap:.6rem; flex:1; min-width:0; }
+  .hscore-team { font-size:.85rem; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hscore-vs { font-size:.7rem; color:var(--muted); font-family:var(--font-mono); flex-shrink:0; }
+  .hscore-scores { display:flex; gap:.5rem; align-items:center; flex-shrink:0; }
+  .hscore-num {
+    font-family:var(--font-mono); font-size:.95rem; font-weight:700;
+    min-width:36px; text-align:center;
+    padding:.15rem .4rem; border-radius:4px;
+    background: rgba(255,255,255,.05);
+  }
+  .hscore-num.winning { color:var(--gold); background:rgba(245,200,66,.12); }
+  .hscore-frame { font-size:.68rem; color:var(--muted); font-family:var(--font-mono); white-space:nowrap; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .booking-grid { grid-template-columns: 1fr; }
+    .teams-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+  }
+  @media (max-width: 600px) {
+    .hero-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+    .hero-stats { gap: 1rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    section { padding: 3rem 1.2rem; }
+    .time-slots { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>R</span>ainbow Lanes</a>
+  <ul class="nav-links">
+    <li><a href="#services">Activities</a></li>
+    <li><a href="#booking">Book a Lane</a></li>
+    <li><a href="#scores">Live Scores</a></li>
+    <li><a href="#leagues">Leagues</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="scrollTo('#booking')">Book Now</button>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Activities</a>
+  <a href="#booking" onclick="closeMenu()">Book a Lane</a>
+  <a href="#scores" onclick="closeMenu()">Live Scores</a>
+  <a href="#leagues" onclick="closeMenu()">Leagues</a>
+  <a href="#hours" onclick="closeMenu()">Hours</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="lanes-art" aria-hidden="true">
+    <div class="lane-strip"></div><div class="lane-strip"></div>
+    <div class="lane-strip"></div><div class="lane-strip"></div>
+    <div class="lane-strip"></div><div class="lane-strip"></div>
+  </div>
+  <span class="hero-eyebrow">Clayton, NC · Est. 1997</span>
+  <h1 class="hero-title">Bowl.<br><span class="strike">Strike.</span><br>Repeat.</h1>
+  <p class="hero-sub">Clayton's premier bowling center — open lanes, cosmic nights, leagues, and private events. Where every frame counts.</p>
+  <div class="hero-btns">
+    <a href="#booking" class="btn-primary">Reserve a Lane</a>
+    <a href="#scores" class="btn-ghost">View Live Scores</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="stat-num">24</span><span class="stat-label">Lanes</span></div>
+    <div class="stat-item"><span class="stat-num">12+</span><span class="stat-label">Leagues</span></div>
+    <div class="stat-item"><span class="stat-num">100%</span><span class="stat-label">Smoke-Free</span></div>
+    <div class="stat-item"><span class="stat-num">1997</span><span class="stat-label">Since</span></div>
+  </div>
+
+  <!-- HERO LIVE SCORE TICKER -->
+  <div class="hero-scoreticker" style="position:relative;z-index:1;margin-top:2.5rem;width:100%;max-width:680px;">
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;">
+      <div class="live-dot">Tonight's Matches</div>
+      <span style="font-size:.72rem;color:var(--muted);font-family:var(--font-mono);">Live · Week 12</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.6rem;" id="heroScoreFeed"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services">
+  <span class="section-tag">What We Offer</span>
+  <h2 class="section-title">Everything Under One Roof</h2>
+  <p class="section-desc">From family open bowling to competitive leagues and private parties — there's always something happening at Rainbow Lanes.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎳</div>
+      <h3>Open Bowling</h3>
+      <p>Walk in, lace up, roll. Open lanes 7 days a week with bumpers available for the little ones.</p>
+      <div class="service-price">From $4.00/game · Shoe rental $3.50</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌌</div>
+      <h3>Cosmic Bowling</h3>
+      <p>Lights down, music up. Friday and Saturday nights transform into a full glow-in-the-dark experience.</p>
+      <div class="service-price">Fri & Sat · 9pm–12am</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏆</div>
+      <h3>Leagues</h3>
+      <p>12+ active leagues from Youth to Seniors. Join an existing team or register your own squad. Track your scores, standings, and stats all season long — right here online. Create your team now and get in the game.</p>
+      <div class="service-price">Seasonal registration open</div>
+      <a href="#booking" onclick="setTimeout(()=>{document.querySelector('[onclick*=tab-teams]').click()},400)" class="btn-sm teal" style="display:inline-block;margin-top:1rem;text-decoration:none;padding:.55rem 1.1rem;">🏆 Create Team</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎂</div>
+      <h3>Birthday Parties</h3>
+      <p>Let us handle it. Kids, teens, and adult packages with dedicated lanes, food, and a private room.</p>
+      <div class="service-price">Packages from $99</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎱</div>
+      <h3>Billiards</h3>
+      <p>Pool tables available daily. A great add-on between frames or a standalone hang session.</p>
+      <div class="service-price">$10/hour · Open 9am–close</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🍔</div>
+      <h3>Snack Bar</h3>
+      <p>Hot food, cold drinks, and everything you need to fuel a full night of bowling fun.</p>
+      <div class="service-price">Open during all sessions</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BOOKING + TEAMS + SCORES TABS -->
+<section id="booking">
+  <span class="section-tag">Book · Play · Track</span>
+  <h2 class="section-title">Your Bowling Hub</h2>
+  <p class="section-desc">Reserve lanes, build your team, and track live scores — all in one place.</p>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab-book', this)">🎳 Reserve a Lane</button>
+    <button class="tab-btn" onclick="switchTab('tab-teams', this)">👥 My Teams</button>
+    <button class="tab-btn" onclick="switchTab('tab-scores', this)" id="scoresTabBtn">📊 Live Scores</button>
+    <button class="tab-btn" onclick="switchTab('tab-standings', this)">🏆 League Standings</button>
+  </div>
+
+  <!-- TAB: BOOKING -->
+  <div id="tab-book" class="tab-pane active">
+    <div class="booking-grid">
+      <div style="display:flex;flex-direction:column;gap:1.2rem;">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="bookName" placeholder="First & Last Name"/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="bookPhone" placeholder="(919) 555-0100"/>
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="bookDate" onchange="loadTimeSlots()"/>
+        </div>
+        <div class="form-group">
+          <label>Number of Bowlers</label>
+          <select id="bookBowlers" onchange="updateSummary()">
+            <option value="1">1 Bowler</option>
+            <option value="2">2 Bowlers</option>
+            <option value="3">3 Bowlers</option>
+            <option value="4" selected>4 Bowlers</option>
+            <option value="5">5 Bowlers</option>
+            <option value="6">6 Bowlers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Number of Games</label>
+          <select id="bookGames" onchange="updateSummary()">
+            <option value="1">1 Game</option>
+            <option value="2" selected>2 Games</option>
+            <option value="3">3 Games</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Session Type</label>
+          <select id="bookType" onchange="updateSummary()">
+            <option value="open">Open Bowling</option>
+            <option value="cosmic">Cosmic Bowling (Fri/Sat night)</option>
+            <option value="bumper">Bumper Bowling (Kids)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Select Time Slot</label>
+          <div class="time-slots" id="timeSlots">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1.2rem;">
+        <div class="booking-summary">
+          <div style="font-family:var(--font-head);font-size:1.3rem;letter-spacing:1px;margin-bottom:.5rem;">Booking Summary</div>
+          <div class="summary-row"><span class="label">Bowlers</span><span class="value" id="sum-bowlers">4</span></div>
+          <div class="summary-row"><span class="label">Games Each</span><span class="value" id="sum-games">2</span></div>
+          <div class="summary-row"><span class="label">Session</span><span class="value" id="sum-type">Open Bowling</span></div>
+          <div class="summary-row"><span class="label">Time</span><span class="value" id="sum-time">—</span></div>
+          <div class="summary-row"><span class="label">Price per game</span><span class="value" id="sum-ppg">$4.00</span></div>
+          <div class="summary-row"><span class="label">Shoe Rentals</span><span class="value" id="sum-shoes">$14.00</span></div>
+          <div class="summary-total">
+            <span>Estimated Total</span>
+            <span class="value" id="sum-total">$46.00</span>
+          </div>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:.8rem;">💡 Walk-ins always welcome. Online reservations hold your lane for Fri, Sat & Sun.</p>
+          <p style="font-size:.8rem;color:var(--muted);">📍 850 NC Highway 42, Clayton, NC 27520 · <a href="tel:9195534386" style="color:var(--teal);">(919) 553-4386</a></p>
+        </div>
+
+        <button class="btn-primary" onclick="confirmBooking()" style="width:100%;padding:1rem;font-size:1rem;">
+          Confirm Reservation →
+        </button>
+        <div class="confirm-msg" id="confirmMsg">
+          ✅ Reservation submitted! We'll confirm via text within 30 minutes.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: TEAMS -->
+  <div id="tab-teams" class="tab-pane">
+    <div class="teams-layout">
+      <!-- Create team -->
+      <div class="team-card">
+        <h3>Create a Team</h3>
+        <div class="create-team-form">
+          <div class="form-group">
+            <label>Team Name</label>
+            <input type="text" id="newTeamName" placeholder="e.g. The Pin Crushers"/>
+          </div>
+          <div class="form-group">
+            <label>League</label>
+            <select id="newTeamLeague">
+              <option>Holy Rollers</option>
+              <option>Go Getters</option>
+              <option>Young at Heart</option>
+              <option>Misfits</option>
+              <option>Rainbow Warriors</option>
+              <option>Out For Fun</option>
+              <option>Slinging Seniors</option>
+              <option>Almost Teens</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Captain Name</label>
+            <input type="text" id="captainName" placeholder="Your name"/>
+          </div>
+          <button class="btn-primary" onclick="createTeam()" style="width:100%">Create Team</button>
+        </div>
+      </div>
+
+      <!-- Active teams -->
+      <div style="display:flex;flex-direction:column;gap:1rem;" id="teamsContainer">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: LIVE SCORES -->
+  <div id="tab-scores" class="tab-pane" id="scores">
+    <div class="score-header">
+      <div>
+        <div class="live-dot">Live Match</div>
+        <div style="margin-top:.3rem;font-family:var(--font-head);font-size:1.5rem;letter-spacing:1px;" id="matchTitle">Go Getters · Lane 7 · Week 12</div>
+      </div>
+      <div class="match-selector" id="matchSelector">
+        <div class="match-chip active" onclick="loadMatch(0,this)">Lane 7</div>
+        <div class="match-chip" onclick="loadMatch(1,this)">Lane 12</div>
+        <div class="match-chip" onclick="loadMatch(2,this)">Lane 19</div>
+      </div>
+    </div>
+    <div class="scorecard-wrap">
+      <table class="scorecard" id="scorecardTable">
+        <!-- Filled by JS -->
+      </table>
+    </div>
+    <div style="margin-top:1.5rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;">
+      <button class="btn-sm teal" onclick="addPlayer()">+ Add Player</button>
+      <button class="btn-sm" onclick="resetScores()">Reset Game</button>
+      <span style="font-size:.78rem;color:var(--muted);margin-left:.5rem;">Click any score cell to edit rolls. Scores calculate automatically.</span>
+    </div>
+  </div>
+
+  <!-- TAB: STANDINGS -->
+  <div id="tab-standings" class="tab-pane">
+    <div style="margin-bottom:1.5rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;">
+      <span style="font-size:.9rem;color:var(--muted);">Filter by league:</span>
+      <div class="match-selector" id="leagueFilter">
+        <div class="match-chip active" onclick="filterLeague('all',this)">All Leagues</div>
+        <div class="match-chip" onclick="filterLeague('Go Getters',this)">Go Getters</div>
+        <div class="match-chip" onclick="filterLeague('Misfits',this)">Misfits</div>
+        <div class="match-chip" onclick="filterLeague('Rainbow Warriors',this)">Rainbow Warriors</div>
+        <div class="match-chip" onclick="filterLeague('Young at Heart',this)">Young at Heart</div>
+      </div>
+    </div>
+    <table class="standing-table" id="standingTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th>League</th>
+          <th>W</th>
+          <th>L</th>
+          <th>Win %</th>
+          <th>Avg Score</th>
+          <th>Trend</th>
+        </tr>
+      </thead>
+      <tbody id="standingBody">
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- HOURS -->
+<div class="divider"></div>
+<section id="hours">
+  <span class="section-tag">When We're Open</span>
+  <h2 class="section-title">Hours of Operation</h2>
+  <div class="hours-grid" id="hoursGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<div class="divider"></div>
+<section id="contact">
+  <span class="section-tag">Find Us</span>
+  <h2 class="section-title">Get In Touch</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <h4>Address</h4>
+          <p>850 NC Highway 42<br>Clayton, NC 27520</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <h4>Phone</h4>
+          <p><a href="tel:9195534386">(919) 553-4386</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🎳</div>
+        <div class="contact-detail">
+          <h4>Reservations</h4>
+          <p>Online booking available Fri, Sat & Sun. Walk-ins welcome all week.</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🚭</div>
+        <div class="contact-detail">
+          <h4>100% Smoke-Free</h4>
+          <p>Rainbow Lanes is a completely smoke-free facility for your comfort.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="team-card">
+        <h3 style="margin-bottom:1rem;">Send a Message</h3>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="form-group"><label>Name</label><input type="text" placeholder="Your name"/></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"/></div>
+          <div class="form-group"><label>Message</label><textarea rows="4" placeholder="How can we help?"></textarea></div>
+          <button class="btn-primary" onclick="showToast('Message sent! We\'ll reply soon.')">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#"><span>R</span>ainbow Lanes</a>
+        <p>Clayton's home for family fun since 1997. 24 lanes, cosmic bowling, leagues, parties, and more.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Bowling</h5>
+        <ul>
+          <li><a href="#booking">Reserve a Lane</a></li>
+          <li><a href="#scores">Live Scores</a></li>
+          <li><a href="#leagues">Leagues</a></li>
+          <li><a href="#services">Cosmic Bowling</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Events</h5>
+        <ul>
+          <li><a href="#services">Birthday Parties</a></li>
+          <li><a href="#services">Corporate Events</a></li>
+          <li><a href="#services">Fundraisers</a></li>
+          <li><a href="#services">School Outings</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Info</h5>
+        <ul>
+          <li><a href="#hours">Hours</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Employment</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Rainbow Lanes Family Fun Center · Clayton, NC</span>
+      <span>850 NC Highway 42 · (919) 553-4386</span>
+    </div>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── UTILITIES ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+function scrollTo(sel) { document.querySelector(sel).scrollIntoView({behavior:'smooth'}); }
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── HOURS ──
+const hoursData = [
+  {day:'Monday',time:'9am – 10pm'},
+  {day:'Tuesday',time:'9am – 10pm'},
+  {day:'Wednesday',time:'9am – 10pm'},
+  {day:'Thursday',time:'9am – 10pm'},
+  {day:'Friday',time:'9am – 12am'},
+  {day:'Saturday',time:'9am – 12am'},
+  {day:'Sunday',time:'1pm – 11pm'},
+];
+const todayIdx = new Date().getDay(); // 0=Sun
+const mapped = [6,0,1,2,3,4,5]; // map JS day to our array
+const todayMapped = mapped[todayIdx];
+document.getElementById('hoursGrid').innerHTML = hoursData.map((h,i) => `
+  <div class="hours-card ${i===todayMapped?'today':''}">
+    <div class="hours-day">${h.day}</div>
+    <div class="hours-time">${h.time}</div>
+    ${i===todayMapped?'<div class="today-badge">Today</div>':''}
+  </div>
+`).join('');
+
+// ── BOOKING ──
+const allSlots = ['10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM',
+  '4:00 PM','5:00 PM','6:00 PM','7:00 PM','8:00 PM','9:00 PM'];
+const takenSlots = ['12:00 PM','3:00 PM','7:00 PM'];
+let selectedTime = null;
+
+function loadTimeSlots() {
+  const wrap = document.getElementById('timeSlots');
+  wrap.innerHTML = allSlots.map(s => {
+    const taken = takenSlots.includes(s);
+    return `<div class="time-slot ${taken?'taken':''}" onclick="${taken?'':'selectSlot(this,\''+s+'\')'}">${s}</div>`;
+  }).join('');
+  selectedTime = null;
+  document.getElementById('sum-time').textContent = '—';
+  updateSummary();
+}
+function selectSlot(el, time) {
+  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTime = time;
+  document.getElementById('sum-time').textContent = time;
+  updateSummary();
+}
+const prices = {open: 4.00, cosmic: 5.50, bumper: 3.50};
+const typeNames = {open:'Open Bowling', cosmic:'Cosmic Bowling', bumper:'Bumper Bowling'};
+function updateSummary() {
+  const b = parseInt(document.getElementById('bookBowlers').value);
+  const g = parseInt(document.getElementById('bookGames').value);
+  const type = document.getElementById('bookType').value;
+  const ppg = prices[type];
+  const shoes = b * 3.50;
+  const total = (b * g * ppg) + shoes;
+  document.getElementById('sum-bowlers').textContent = b;
+  document.getElementById('sum-games').textContent = g;
+  document.getElementById('sum-type').textContent = typeNames[type];
+  document.getElementById('sum-ppg').textContent = '$' + ppg.toFixed(2);
+  document.getElementById('sum-shoes').textContent = '$' + shoes.toFixed(2);
+  document.getElementById('sum-total').textContent = '$' + total.toFixed(2);
+}
+function confirmBooking() {
+  const name = document.getElementById('bookName').value.trim();
+  const phone = document.getElementById('bookPhone').value.trim();
+  const date = document.getElementById('bookDate').value;
+  if (!name) { showToast('Please enter your name.'); return; }
+  if (!date) { showToast('Please select a date.'); return; }
+  if (!selectedTime) { showToast('Please select a time slot.'); return; }
+  document.getElementById('confirmMsg').classList.add('show');
+  showToast('🎳 Lane reserved for ' + name + '!');
+}
+// Init
+loadTimeSlots();
+updateSummary();
+// Set min date
+document.getElementById('bookDate').min = new Date().toISOString().split('T')[0];
+
+// ── TEAMS ──
+let teams = [
+  { name: 'Pin Demons', league: 'Go Getters', captain: 'Marcus W.', members: ['Marcus W.','Tamika R.','Devon S.'] },
+  { name: 'No Gutters', league: 'Misfits', captain: 'Laura T.', members: ['Laura T.','Bobby J.'] },
+];
+function renderTeams() {
+  document.getElementById('teamsContainer').innerHTML = teams.map((t,i) => `
+    <div class="team-card">
+      <h3>${t.name}</h3>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;">${t.league} · Cap: ${t.captain}</div>
+      <ul class="member-list">
+        ${t.members.map((m,mi) => `
+          <li class="member-item">
+            <div class="member-avatar">${m.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+            <span>${m}</span>
+            <span class="member-role">${mi===0?'Captain':'Bowler'}</span>
+          </li>
+        `).join('')}
+      </ul>
+      <div class="add-member-row">
+        <input type="text" placeholder="Add member name..." id="addMem${i}"/>
+        <button class="btn-sm" onclick="addMember(${i})">+ Add</button>
+      </div>
+    </div>
+  `).join('');
+}
+function createTeam() {
+  const name = document.getElementById('newTeamName').value.trim();
+  const league = document.getElementById('newTeamLeague').value;
+  const captain = document.getElementById('captainName').value.trim();
+  if (!name || !captain) { showToast('Please fill in team name and captain.'); return; }
+  teams.unshift({name, league, captain, members:[captain]});
+  renderTeams();
+  document.getElementById('newTeamName').value = '';
+  document.getElementById('captainName').value = '';
+  showToast('Team "' + name + '" created!');
+}
+function addMember(i) {
+  const inp = document.getElementById('addMem'+i);
+  const val = inp.value.trim();
+  if (!val) return;
+  if (teams[i].members.length >= 6) { showToast('Max 6 members per team.'); return; }
+  teams[i].members.push(val);
+  renderTeams();
+  showToast(val + ' added to ' + teams[i].name);
+}
+renderTeams();
+
+// ── SCORING ──
+const matchData = [
+  { title: 'Go Getters · Lane 7 · Week 12', players: ['Marcus W.','Tamika R.','Devon S.','Laura T.'] },
+  { title: 'Misfits · Lane 12 · Week 12', players: ['Bobby J.','Carla M.','Steve P.'] },
+  { title: 'Rainbow Warriors · Lane 19 · Week 12', players: ['Jin L.','Rosa V.','Terrence K.','Pam H.'] },
+];
+let currentMatch = 0;
+let rolls = {}; // rolls[playerIdx][frameIdx] = [r1, r2, r3?]
+
+function initRolls() {
+  const players = matchData[currentMatch].players;
+  rolls = {};
+  players.forEach((_, pi) => {
+    rolls[pi] = {};
+    for (let f = 0; f < 10; f++) rolls[pi][f] = ['', ''];
+    rolls[pi][9] = ['', '', '']; // 10th frame has 3 possible rolls
+  });
+}
+function calcFrameScore(pi) {
+  // Returns array of cumulative scores per frame (or null if incomplete)
+  const scores = [];
+  let total = 0;
+  for (let f = 0; f < 10; f++) {
+    const r = rolls[pi][f].map(v => v === 'X' ? 10 : v === '/' ? null : parseInt(v) || 0);
+    if (f < 9) {
+      const r1 = parseInt(rolls[pi][f][0] === 'X' ? 10 : rolls[pi][f][0]) || 0;
+      const r2Raw = rolls[pi][f][1];
+      let r2 = r2Raw === '/' ? 10 - r1 : (parseInt(r2Raw) || 0);
+      if (rolls[pi][f][0] === 'X') { // strike
+        // bonus: next 2 rolls
+        let bonus = getNextRolls(pi, f, 2);
+        if (bonus === null) { scores.push(null); continue; }
+        total += 10 + bonus;
+        scores.push(total);
+      } else if (r2Raw === '/') { // spare
+        let bonus = getNextRolls(pi, f, 1);
+        if (bonus === null) { scores.push(null); continue; }
+        total += 10 + bonus;
+        scores.push(total);
+      } else {
+        total += r1 + r2;
+        scores.push(total);
+      }
+    } else {
+      // 10th frame: just sum all rolls
+      const t = rolls[pi][9].reduce((acc, v) => {
+        if (v === 'X') return acc + 10;
+        if (v === '/') return acc + (10 - (parseInt(rolls[pi][9][0] === 'X' ? 10 : rolls[pi][9][0]) || 0));
+        return acc + (parseInt(v) || 0);
+      }, 0);
+      total += t;
+      scores.push(total || null);
+    }
+  }
+  return scores;
+}
+function getNextRolls(pi, frameIdx, count) {
+  const allRolls = [];
+  for (let f = frameIdx + 1; f < 10 && allRolls.length < count; f++) {
+    for (let r = 0; r < rolls[pi][f].length && allRolls.length < count; r++) {
+      const v = rolls[pi][f][r];
+      if (v === '') return null;
+      if (v === 'X') { allRolls.push(10); continue; }
+      if (v === '/') {
+        const prev = allRolls.length > 0 ? allRolls[allRolls.length-1] : (parseInt(rolls[pi][f][0]) || 0);
+        allRolls.push(10 - prev); continue;
+      }
+      allRolls.push(parseInt(v) || 0);
+    }
+  }
+  if (allRolls.length < count) return null;
+  return allRolls.slice(0, count).reduce((a, b) => a + b, 0);
+}
+function renderScorecard() {
+  const match = matchData[currentMatch];
+  document.getElementById('matchTitle').textContent = match.title;
+  const scores = match.players.map((_, pi) => calcFrameScore(pi));
+  const headers = Array.from({length:10}, (_,i) => `<th>${i===9?'10th':'Frame '+(i+1)}</th>`).join('') + '<th>Total</th>';
+  const rows = match.players.map((name, pi) => {
+    const frameCells = Array.from({length:10}, (_,fi) => {
+      const r = rolls[pi][fi];
+      const r1 = r[0], r2 = r[1], r3 = r[2];
+      const isStrike = fi < 9 && r1 === 'X';
+      const isSpare = !isStrike && r2 === '/';
+      const cum = scores[pi][fi];
+      const rollCount = fi === 9 ? 3 : 2;
+      const rollInputs = Array.from({length: rollCount}, (_,ri) => `
+        <input class="roll-input" maxlength="2" value="${r[ri]}"
+          oninput="setRoll(${pi},${fi},${ri},this.value)"
+          placeholder="${ri===0?'R1':ri===1?'R2':'R3'}"/>
+      `).join(' ');
+      return `<td class="frame-cell">
+        <div class="frame-rolls">${rollInputs}</div>
+        <div class="frame-score ${isStrike?'strike':isSpare?'spare':''}">${cum !== null ? cum : ''}</div>
+      </td>`;
+    }).join('');
+    const total = scores[pi][9];
+    return `<tr>
+      <td class="player-name-cell">${name}</td>
+      ${frameCells}
+      <td class="total-cell">${total !== null ? total : '—'}</td>
+    </tr>`;
+  }).join('');
+  document.getElementById('scorecardTable').innerHTML = `
+    <thead><tr><th class="player-col">Player</th>${headers}</tr></thead>
+    <tbody>${rows}</tbody>
+  `;
+}
+function setRoll(pi, fi, ri, val) {
+  // Auto-format
+  val = val.toUpperCase().trim();
+  if (val === '10' || val.toLowerCase() === 'x') val = 'X';
+  rolls[pi][fi][ri] = val;
+  renderScorecard();
+}
+function loadMatch(idx, el) {
+  document.querySelectorAll('#matchSelector .match-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  currentMatch = idx;
+  initRolls();
+  renderScorecard();
+}
+function addPlayer() {
+  const name = prompt('Enter player name:');
+  if (!name) return;
+  matchData[currentMatch].players.push(name);
+  rolls[matchData[currentMatch].players.length - 1] = {};
+  const pi = matchData[currentMatch].players.length - 1;
+  for (let f = 0; f < 10; f++) rolls[pi][f] = ['', ''];
+  rolls[pi][9] = ['', '', ''];
+  renderScorecard();
+  showToast(name + ' added to scoreboard!');
+}
+function resetScores() {
+  if (!confirm('Reset all scores for this match?')) return;
+  initRolls();
+  renderScorecard();
+  showToast('Scores reset.');
+}
+// Init scoring
+initRolls();
+renderScorecard();
+
+// ── STANDINGS ──
+const standingsData = [
+  {team:'Pin Demons',league:'Go Getters',w:18,l:6,avg:187},
+  {team:'Rolling Thunders',league:'Misfits',w:17,l:7,avg:193},
+  {team:'Gutter Gang',league:'Rainbow Warriors',w:15,l:9,avg:178},
+  {team:'No Gutters',league:'Misfits',w:14,l:10,avg:171},
+  {team:'Spare Parts',league:'Go Getters',w:13,l:11,avg:168},
+  {team:'Frame Burners',league:'Young at Heart',w:12,l:12,avg:162},
+  {team:'Lucky Strikes',league:'Rainbow Warriors',w:10,l:14,avg:159},
+  {team:'The Splits',league:'Young at Heart',w:8,l:16,avg:155},
+  {team:'Holy Rollers',league:'Go Getters',w:6,l:18,avg:148},
+  {team:'Last Chance',league:'Misfits',w:4,l:20,avg:141},
+];
+let filteredLeague = 'all';
+function renderStandings() {
+  let data = filteredLeague === 'all' ? standingsData : standingsData.filter(d => d.league === filteredLeague);
+  data = [...data].sort((a,b) => b.w - a.w);
+  const maxW = data[0]?.w || 1;
+  document.getElementById('standingBody').innerHTML = data.map((d, i) => {
+    const pct = ((d.w / (d.w + d.l)) * 100).toFixed(1);
+    const bar = Math.round((d.w / maxW) * 100);
+    const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-other';
+    const trend = d.w > d.l ? '↑' : d.w === d.l ? '→' : '↓';
+    const trendColor = d.w > d.l ? 'var(--teal)' : d.w === d.l ? 'var(--muted)' : 'var(--red)';
+    return `<tr>
+      <td><span class="rank-badge ${rankClass}">${i+1}</span></td>
+      <td style="font-weight:600">${d.team}</td>
+      <td style="color:var(--muted);font-size:.85rem">${d.league}</td>
+      <td>${d.w}</td>
+      <td>${d.l}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+          <span>${pct}%</span>
+          <div class="win-bar-wrap"><div class="win-bar" style="width:${bar}%"></div></div>
+        </div>
+      </td>
+      <td style="font-family:var(--font-mono)">${d.avg}</td>
+      <td style="color:${trendColor};font-size:1.1rem">${trend}</td>
+    </tr>`;
+  }).join('');
+}
+function filterLeague(league, el) {
+  document.querySelectorAll('#leagueFilter .match-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  filteredLeague = league;
+  renderStandings();
+}
+renderStandings();
+
+// ── HERO LIVE SCORE FEED ──
+const heroMatches = [
+  { lane: 'Lane 4',  frame: '8th Frame',  teamA: 'Pin Demons',    teamB: 'Rolling Thunders', scoreA: 167, scoreB: 154 },
+  { lane: 'Lane 9',  frame: '6th Frame',  teamA: 'No Gutters',    teamB: 'Gutter Gang',      scoreA: 121, scoreB: 138 },
+  { lane: 'Lane 14', frame: '10th Frame', teamA: 'Lucky Strikes', teamB: 'Spare Parts',      scoreA: 203, scoreB: 198 },
+  { lane: 'Lane 19', frame: '5th Frame',  teamA: 'Frame Burners', teamB: 'Holy Rollers',     scoreA:  89, scoreB:  95 },
+];
+function renderHeroFeed() {
+  const el = document.getElementById('heroScoreFeed');
+  if (!el) return;
+  el.innerHTML = heroMatches.map(m => {
+    const aWin = m.scoreA > m.scoreB;
+    const bWin = m.scoreB > m.scoreA;
+    return `<div class="hero-score-row">
+      <span class="hscore-lane">${m.lane}</span>
+      <div class="hscore-teams">
+        <span class="hscore-team">${m.teamA}</span>
+        <span class="hscore-vs">vs</span>
+        <span class="hscore-team">${m.teamB}</span>
+      </div>
+      <div class="hscore-scores">
+        <span class="hscore-num ${aWin?'winning':''}">${m.scoreA}</span>
+        <span style="color:var(--muted);font-size:.7rem;font-family:var(--font-mono)">–</span>
+        <span class="hscore-num ${bWin?'winning':''}">${m.scoreB}</span>
+      </div>
+      <span class="hscore-frame">${m.frame}</span>
+    </div>`;
+  }).join('');
+}
+function tickScores() {
+  heroMatches.forEach(m => {
+    if (Math.random() > .55) m.scoreA = Math.min(300, m.scoreA + Math.floor(Math.random()*12)+1);
+    if (Math.random() > .55) m.scoreB = Math.min(300, m.scoreB + Math.floor(Math.random()*12)+1);
+  });
+  renderHeroFeed();
+}
+renderHeroFeed();
+setInterval(tickScores, 3500);
+</script>
+</body>
+</html>
